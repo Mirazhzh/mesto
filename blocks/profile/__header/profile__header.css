@@ -1,0 +1,12 @@
+.profile__header {
+  margin: 26px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .profile__header {
+    gap: 18px;
+  }
+}

@@ -1,0 +1,11 @@
+.gallery__place-name {
+  margin: 0 21px;
+  padding: 25px 0 31px;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

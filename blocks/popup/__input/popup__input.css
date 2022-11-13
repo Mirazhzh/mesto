@@ -1,0 +1,9 @@
+.popup__input {
+  width: 238px;
+}
+
+@media (min-width: 768px) {
+  .popup__input {
+    width: 358px;
+  }
+}

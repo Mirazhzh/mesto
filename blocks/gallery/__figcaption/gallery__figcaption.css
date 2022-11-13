@@ -1,0 +1,13 @@
+.gallery__figcaption {
+  margin: 0;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .gallery__figcaption {
+    max-width: 282px;
+  }
+}
