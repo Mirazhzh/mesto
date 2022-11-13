@@ -35,7 +35,6 @@ function formSubmitHandler (evt) {
     evt.target.reset();
   };
 };
-
 formElement.addEventListener('submit', formSubmitHandler);
 formElement.addEventListener('submit', closePopup);
 

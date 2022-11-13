@@ -5,6 +5,7 @@
   height: 50px;
   border: 2px solid #FFFFFF;
   background-image: url(../../../images/add-button.svg);
+  background-size: 16px;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -18,5 +19,6 @@
   .profile__add-button {
     width: 150px;
     margin: 0;
+    background-size: 22px;
   }
 }
