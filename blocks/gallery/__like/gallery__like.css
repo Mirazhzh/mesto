@@ -1,8 +1,8 @@
 .gallery__like {
   all: unset;
-  width: 22px;
-  height: 19px;
-  margin-right: 20px;
+  min-width: 22px;
+  min-height: 20px;
+  display: block;
   background-image: url(../../../images/like.svg);
   background-repeat: no-repeat;
   background-position: center;

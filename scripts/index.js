@@ -10,6 +10,8 @@ let saveButton = document.querySelector('.popup__save-button');
 
 function openPopup() {
     popup.classList.add('popup_opened');
+    newName.textContent = profileName;
+    newDescription.textContent = profileDescription;
 }
 editButton.addEventListener('click', openPopup);
 
@@ -18,22 +20,10 @@ function closePopup() {
 }
 closeButton.addEventListener('click', closePopup);
 
-function clickNotPopup(event) {
-    if(event.target === event.currentTarget) {
-        popup.classList.remove('popup_opened');
-    }};
-popup.addEventListener('click', clickNotPopup);
-
 function formSubmitHandler (evt) {
     evt.preventDefault();
-  if(newName.value <= 0) {
-    profileName = profileName.textContent;
-    profileDescription = profileDescription.textContent;
-  } else {
     profileName.textContent = newName.value;
     profileDescription.textContent = newDescription.value;
-    evt.target.reset();
-  };
 };
 formElement.addEventListener('submit', formSubmitHandler);
 formElement.addEventListener('submit', closePopup);

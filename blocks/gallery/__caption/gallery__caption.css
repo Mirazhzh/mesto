@@ -1,5 +1,7 @@
-.gallery__figcaption {
+.gallery__caption {
+  box-sizing: border-box;
   margin: 0;
+  padding-right: 20px;
   color: black;
   display: flex;
   justify-content: space-between;
@@ -7,7 +9,7 @@
 }
 
 @media (min-width: 768px) {
-  .gallery__figcaption {
+  .gallery__caption {
     max-width: 282px;
   }
 }

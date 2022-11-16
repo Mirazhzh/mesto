@@ -1,4 +1,4 @@
-.gallery__figure {
+.gallery__article {
   margin: 20px 19px 0;
   background-color: #FFFFFF;
   border-radius: 10px;
@@ -6,7 +6,7 @@
 }
 
 @media (min-width: 768px) {
-  .gallery__figure {
+  .gallery__article {
     margin: 0;
   }
 }

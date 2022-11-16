@@ -1,7 +1,8 @@
 .popup__text {
   box-sizing: border-box;
   width: 100%;
-  padding: 30px 0 13px;
+  margin-top: 30px;
+  padding: 0 0 9px 0;
   border-top: none;
   border-right: none;
   border-bottom: 1px solid rgb (0, 0, 0, .2);

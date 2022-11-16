@@ -1,7 +1,6 @@
 .profile {
-  /*position: relative;*/
   margin: 0 auto;
-  padding-top: 38px;
+  padding-top: 42px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

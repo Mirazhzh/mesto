@@ -1,6 +1,7 @@
 .profile__header {
-  margin: 26px auto 0;
+  margin: 21px auto 0;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }

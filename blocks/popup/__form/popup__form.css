@@ -1,8 +1,6 @@
 .popup__form {
-  width: 282px;
-  height: 322px;
   box-sizing: border-box;
-  padding: 25px 22px;
+  margin: 0 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -11,9 +9,7 @@
 
 @media (min-width: 768px) {
   .popup__form {
-    width: 430px;
-    height: 330px;
-    padding: 34px 36px 37px;
+    margin: 0 36px;
   }
 }
 
