@@ -10,8 +10,8 @@ let saveButton = document.querySelector('.popup__save-button');
 
 function openPopup() {
     popup.classList.add('popup_opened');
-    newName.textContent = profileName;
-    newDescription.textContent = profileDescription;
+    newName.value = profileName.textContent;
+    newDescription.value = profileDescription.textContent;
 }
 editButton.addEventListener('click', openPopup);
 
@@ -24,9 +24,10 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     profileName.textContent = newName.value;
     profileDescription.textContent = newDescription.value;
+    closePopup();
 };
+
 formElement.addEventListener('submit', formSubmitHandler);
-formElement.addEventListener('submit', closePopup);
 
 
 
