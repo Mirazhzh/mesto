@@ -97,13 +97,13 @@ const galleryContainer = document.querySelector('.gallery__list');
 
 const galleryTemplate = document.querySelector('#gallery-template').content;
 
-/*handlerAddLike = (evt) => {
+handlerAddLike = (evt) => {
   evt.target.classList.toggle('gallery__like_active');
 }
 
 handlerDelete = (evt) => {
   evt.target.closest('.gallery__element').remove();
-}*/
+}
 
 
 const generateCard = (dataCard) => {
@@ -111,12 +111,12 @@ const generateCard = (dataCard) => {
     newCard.querySelector('.gallery__place-name').textContent = dataCard.name;
     newCard.querySelector('.gallery__picture').setAttribute('src', dataCard.link);
 
-    /*const likeButton = newCard.querySelector('.gallery__like');
+    const likeButton = newCard.querySelector('.gallery__like');
     const deleteButton = newCard.querySelector('.gallery__trash');
     likeButton.addEventListener('click', handlerAddLike);
     deleteButton.addEventListener('click', handlerDelete);
 
-    const bigPicButton = newCard.querySelector('.gallery__picture');
+    /*const bigPicButton = newCard.querySelector('.gallery__picture');
     const popupShow = document.querySelector('#show-popup');
     const closeButtonShow = popupShow.querySelector('.popup__close-button');
     const popupTitleShow = popupShow.querySelector('.popup__caption');
