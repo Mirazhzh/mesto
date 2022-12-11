@@ -27,78 +27,40 @@
         </section>
         <section class="gallery">
           <ul class="gallery__list">
-<!--
-            <li class="gallery__element">
-              <article class="gallery__article">
-                <img src="./images/karachaevo-cherkes.jpg" alt="фото древней церкви" class="gallery__picture">
-                <div class="gallery__caption">
-                  <h2 class="gallery__place-name">Карачаево-Черкессия</h2>
-                  <button type="button" class="gallery__like"></button>
-                </div>
-              </article>
-            </li>
-            <li class="gallery__element">
-              <article class="gallery__article">
-                <img src="./images/elbrus.jpg" alt="фото Эльбруса вдалеке" class="gallery__picture">
-                <div class="gallery__caption">
-                  <h2 class="gallery__place-name">Гора Эльбрус</h2>
-                  <button type="button" class="gallery__like"></button>
-                </div>
-              </article>
-            </li>
-            <li class="gallery__element">
-              <article class="gallery__article">
-                <img src="./images/dombaj.jpg" alt="фото горы Домбай" class="gallery__picture">
-                <div class="gallery__caption">
-                  <h2 class="gallery__place-name">Домбай</h2>
-                  <button type="button" class="gallery__like"></button>
-                </div>
-              </article>
-            </li>
-            <li class="gallery__element">
-              <article class="gallery__article">
-                <img src="./images/altaj.jpeg" alt="фото гор на Алтае" class="gallery__picture">
-                <div class="gallery__caption">
-                  <h2 class="gallery__place-name">Алтай</h2>
-                  <button type="button" class="gallery__like"></button>
-                </div>
-              </article>
-            </li>
-            <li class="gallery__element">
-              <article class="gallery__article">
-                <img src="./images/kamchatka.jpg" alt="фото гор на Алтае" class="gallery__picture">
-                <div class="gallery__caption">
-                  <h2 class="gallery__place-name">Камчатка</h2>
-                  <button type="button" class="gallery__like"></button>
-                </div>
-              </article>
-            </li>
-
-            <li class="gallery__element">
-              <article class="gallery__article">
-                <img src="./images/ural.jpg" alt="фото гор на Алтае" class="gallery__picture">
-                <div class="gallery__caption">
-                  <h2 class="gallery__place-name">Урал</h2>
-                  <button class="gallery__like"></button>
-                </div>
-              </article>
-            </li>
--->
           </ul>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">&copy; 2022 Анастасия Оруджова</p>
       </footer>
-      <div class="popup">
+      <div class="popup" id="edit-popup">
         <div class="popup__container">
-          <h2 class="popup__title">Редактировать профиль</h2>
+          <h2 class="popup__title"></h2>
           <form name="name-description" class="popup__form">
-            <input type="text" placeholder="Жак-Ив Кусто" name="new-name" class="popup__text popup__text_type_name">
-            <input type="text" placeholder="Исследователь океана" name="new-description" class="popup__text popup__text_type_description">
+            <input type="text" name="new-profile-name" class="popup__text popup__text_type_name">
+            <input type="text" name="new-description" class="popup__text popup__text_type_description">
             <button type="submit" class="popup__save-button">Сохранить</button>
           </form>
           <button type="button" class="popup__close-button"></button>
+        </div>
+      </div>
+      <div class="popup" id="add-popup">
+        <div class="popup__container">
+          <h2 class="popup__title"></h2>
+          <form name="name-description" class="popup__form">
+            <input type="text" name="new-place-name" class="popup__text popup__text_type_place">
+            <input type="text" name="new-link" class="popup__text popup__text_type_link">
+            <button type="submit" class="popup__save-button">Сохранить</button>
+          </form>
+          <button type="button" class="popup__close-button"></button>
+        </div>
+      </div>
+      <div class="popup" id="show-popup">
+        <div class="popup__show-container">
+          <button type="button" class="popup__close-button"></button>
+          <div class="popup__picture"></div>
+          <!-- <img src="#" alt="#" class="popup__picture"> -->
+          <h2 class="popup__caption"></h2>
         </div>
       </div>
     </div>
@@ -109,7 +71,7 @@
           <img src="#" alt="#" class="gallery__picture">
           <div class="gallery__caption">
             <h2 class="gallery__place-name">Урал</h2>
-            <button class="gallery__like"></button>
+            <button type="button" class="gallery__like"></button>
           </div>
         </article>
       </li>

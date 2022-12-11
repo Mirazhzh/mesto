@@ -1,0 +1,19 @@
+.gallery__trash {
+  all: unset;
+  min-width: 18px;
+  min-height: 20px;
+  display: block;
+  background-image: url(../../../images/trash1.svg),
+  url(../../../images/trash2.svg);
+  background-repeat: no-repeat;
+  background-position: top, bottom;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+}
+
+.gallery__trash:hover {
+  opacity: .6;
+  cursor: pointer;
+}
