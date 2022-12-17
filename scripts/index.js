@@ -19,6 +19,14 @@ const newLink = popupAdd.querySelector('.popup__text_type_link');
 const saveButtonEdit = popupEdit.querySelector('.popup__save-button');
 const saveButtonAdd = popupAdd.querySelector('.popup__save-button');
 
+/*function openPopup(targetPopup) {
+  targetPopup.classList.add('popup_opened');
+}*/
+
+closePopup = (evt) => {
+  evt.target.closest('.popup').classList.remove('popup_opened');
+}
+
 function openPopupEdit() {
     popupEdit.classList.add('popup_opened');
     popupTitleEdit.textContent = 'Редактировать профиль';
@@ -27,10 +35,7 @@ function openPopupEdit() {
 }
 editButton.addEventListener('click', openPopupEdit);
 
-function closePopupEdit() {
-    popupEdit.classList.remove('popup_opened');
-}
-closeButtonEdit.addEventListener('click', closePopupEdit);
+closeButtonEdit.addEventListener('click', closePopup);
 
 function formSubmitHandlerEdit (evt) {
     evt.preventDefault();
@@ -49,10 +54,7 @@ function openPopupAdd() {
 }
 addButton.addEventListener('click', openPopupAdd);
 
-function closePopupAdd() {
-  popupAdd.classList.remove('popup_opened');
-}
-closeButtonAdd.addEventListener('click', closePopupAdd);
+closeButtonAdd.addEventListener('click', closePopup);
 
 function formSubmitHandlerAdd (evt) {
     evt.preventDefault();
@@ -105,6 +107,22 @@ handlerDelete = (evt) => {
   evt.target.closest('.gallery__element').remove();
 }
 
+const popupShow = document.querySelector('#show-popup');
+const closeButtonShow = popupShow.querySelector('.popup__close-button');
+const popupTitleShow = popupShow.querySelector('.popup__caption');
+const popupPicture = popupShow.querySelector('.popup__picture');
+
+/*function openPopupShow(evt) {
+  evt.target.popupShow.classList.add('popup_opened');
+}
+
+/*openPopupShow = (evt) => {
+  evt.target.popupShow.classList.add('popup_opened');
+}*/
+
+function openPopupShow() {
+  popupShow.classList.add('popup_opened');
+}
 
 const generateCard = (dataCard) => {
     const newCard = galleryTemplate.querySelector('.gallery__element').cloneNode(true);
@@ -116,24 +134,17 @@ const generateCard = (dataCard) => {
     likeButton.addEventListener('click', handlerAddLike);
     deleteButton.addEventListener('click', handlerDelete);
 
-    /*const bigPicButton = newCard.querySelector('.gallery__picture');
-    const popupShow = document.querySelector('#show-popup');
-    const closeButtonShow = popupShow.querySelector('.popup__close-button');
-    const popupTitleShow = popupShow.querySelector('.popup__caption');
-    popupTitleShow.textContent = dataCard.name;
-    const popupPicture = popupShow.querySelector('.popup__picture');
-    popupPicture.setAttribute('src', dataCard.link);
-
-    bigPicButton.addEventListener('click', openPopupShow);
-    closeButtonShow.addEventListener('click', closePopupShow);
-
-    function openPopupShow() {
-      popupShow.classList.add('popup_opened');
-    }
+    const bigPicButton = newCard.querySelector('.gallery__picture');
     
-    function closePopupShow() {
-    popupShow.classList.remove('popup_opened');
-    }*/
+    
+    popupTitleShow.textContent = dataCard.name;
+    popupPicture.setAttribute('src', dataCard.link);
+    
+    
+    
+    bigPicButton.addEventListener('click', openPopupShow);
+
+    closeButtonShow.addEventListener('click', closePopup);
 
     return newCard;
 }

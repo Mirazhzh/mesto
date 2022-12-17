@@ -1,6 +1,7 @@
 .popup__show-container {
-  /*width: 282px;
-  height: 322px;*/
+  max-width: 282px;
+  /*height: 322px;*/
+  margin: 90px auto;
   position: relative;
   display: block;
 }
@@ -8,7 +9,7 @@
 @media (min-width: 768px) {
   .popup__show-container {
     margin: 90px auto;
-    width: 100%;
+    max-width: 816px;
     max-height: 540px;
   }
 }
