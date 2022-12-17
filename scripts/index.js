@@ -19,16 +19,16 @@ const newLink = popupAdd.querySelector('.popup__text_type_link');
 const saveButtonEdit = popupEdit.querySelector('.popup__save-button');
 const saveButtonAdd = popupAdd.querySelector('.popup__save-button');
 
-/*function openPopup(targetPopup) {
+function openPopup(targetPopup) {
   targetPopup.classList.add('popup_opened');
-}*/
+}
 
 closePopup = (evt) => {
   evt.target.closest('.popup').classList.remove('popup_opened');
 }
 
 function openPopupEdit() {
-    popupEdit.classList.add('popup_opened');
+    openPopup(popupEdit);
     popupTitleEdit.textContent = 'Редактировать профиль';
     newProfileName.value = profileName.textContent;
     newDescription.value = profileDescription.textContent;
@@ -47,7 +47,7 @@ function formSubmitHandlerEdit (evt) {
 formElementEdit.addEventListener('submit', formSubmitHandlerEdit);
 
 function openPopupAdd() {
-    popupAdd.classList.add('popup_opened');
+  openPopup(popupAdd);
     popupTitleAdd.textContent = 'Новое место';
     newPlace.value = 'Название';
     newLink.value = 'Ссылка на картинку';
@@ -112,37 +112,26 @@ const closeButtonShow = popupShow.querySelector('.popup__close-button');
 const popupTitleShow = popupShow.querySelector('.popup__caption');
 const popupPicture = popupShow.querySelector('.popup__picture');
 
-/*function openPopupShow(evt) {
-  evt.target.popupShow.classList.add('popup_opened');
-}
-
-/*openPopupShow = (evt) => {
-  evt.target.popupShow.classList.add('popup_opened');
-}*/
-
-function openPopupShow() {
-  popupShow.classList.add('popup_opened');
-}
 
 const generateCard = (dataCard) => {
     const newCard = galleryTemplate.querySelector('.gallery__element').cloneNode(true);
-    newCard.querySelector('.gallery__place-name').textContent = dataCard.name;
-    newCard.querySelector('.gallery__picture').setAttribute('src', dataCard.link);
+    const newCardName = newCard.querySelector('.gallery__place-name');
+    newCardName.textContent = dataCard.name;
+    const newCardImg = newCard.querySelector('.gallery__picture');
+    newCardImg.setAttribute('src', dataCard.link);
+    
+    function openPopupShow() {
+      popupTitleShow.textContent = dataCard.name;
+      popupPicture.setAttribute('src', dataCard.link);
+      openPopup(popupShow);
+    }
+
+    newCardImg.addEventListener('click', openPopupShow);
 
     const likeButton = newCard.querySelector('.gallery__like');
     const deleteButton = newCard.querySelector('.gallery__trash');
     likeButton.addEventListener('click', handlerAddLike);
     deleteButton.addEventListener('click', handlerDelete);
-
-    const bigPicButton = newCard.querySelector('.gallery__picture');
-    
-    
-    popupTitleShow.textContent = dataCard.name;
-    popupPicture.setAttribute('src', dataCard.link);
-    
-    
-    
-    bigPicButton.addEventListener('click', openPopupShow);
 
     closeButtonShow.addEventListener('click', closePopup);
 
