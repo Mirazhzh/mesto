@@ -91,7 +91,7 @@ const initialCards = [
   },
   {
     name: 'Алтай',
-    link: '/images/altaj.jpeg'
+    link: '/images/altaj.jpg'
   }
 ];
 
