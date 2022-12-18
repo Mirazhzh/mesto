@@ -1,7 +1,5 @@
 const popupEdit = document.querySelector('#edit-popup');
-const popupTitleEdit = popupEdit.querySelector('.popup__title');
 const popupAdd = document.querySelector('#add-popup');
-const popupTitleAdd = popupAdd.querySelector('.popup__title');
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
@@ -19,53 +17,53 @@ const newLink = popupAdd.querySelector('.popup__text_type_link');
 const saveButtonEdit = popupEdit.querySelector('.popup__save-button');
 const saveButtonAdd = popupAdd.querySelector('.popup__save-button');
 
-function openPopup(targetPopup) {
+const closeButtons = document.querySelectorAll('.popup__close-button');
+
+const openPopup = (targetPopup) => {
   targetPopup.classList.add('popup_opened');
 }
 
-closePopup = (evt) => {
-  evt.target.closest('.popup').classList.remove('popup_opened');
+const closePopup = (targetPopup) => {
+  targetPopup.classList.remove('popup_opened');
 }
 
-function openPopupEdit() {
+const openPopupEdit = () => {
     openPopup(popupEdit);
-    popupTitleEdit.textContent = 'Редактировать профиль';
     newProfileName.value = profileName.textContent;
     newDescription.value = profileDescription.textContent;
 }
 editButton.addEventListener('click', openPopupEdit);
 
-closeButtonEdit.addEventListener('click', closePopup);
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
 
-function formSubmitHandlerEdit (evt) {
+//closeButtonEdit.addEventListener('click', () => closePopup(popupEdit));
+
+const handleEditFormSubmit = (evt) => {
     evt.preventDefault();
     profileName.textContent = newProfileName.value;
     profileDescription.textContent = newDescription.value;
-    closePopupEdit();
+    closePopup(popupEdit);
 };
 
-formElementEdit.addEventListener('submit', formSubmitHandlerEdit);
+formElementEdit.addEventListener('submit', handleEditFormSubmit);
 
-function openPopupAdd() {
-  openPopup(popupAdd);
-    popupTitleAdd.textContent = 'Новое место';
-    newPlace.value = 'Название';
-    newLink.value = 'Ссылка на картинку';
-}
-addButton.addEventListener('click', openPopupAdd);
+addButton.addEventListener('click', () => openPopup(popupAdd));
 
-closeButtonAdd.addEventListener('click', closePopup);
+//closeButtonAdd.addEventListener('click', () => closePopup(popupAdd));
 
-function formSubmitHandlerAdd (evt) {
+const handleAddFormSubmit = (evt) => {
     evt.preventDefault();
     renderCard({ name: newPlace.value,
     link: newLink.value });
     newPlace.value = '';
     newLink.value = '';
-    closePopupAdd();
+    closePopup(popupAdd);
 };
 
-formElementAdd.addEventListener('submit', formSubmitHandlerAdd);
+formElementAdd.addEventListener('submit', handleAddFormSubmit);
 
 
 const initialCards = [
@@ -99,11 +97,11 @@ const galleryContainer = document.querySelector('.gallery__list');
 
 const galleryTemplate = document.querySelector('#gallery-template').content;
 
-handlerAddLike = (evt) => {
+const handleAddLike = (evt) => {
   evt.target.classList.toggle('gallery__like_active');
 }
 
-handlerDelete = (evt) => {
+const handleDelete = (evt) => {
   evt.target.closest('.gallery__element').remove();
 }
 
@@ -119,10 +117,12 @@ const generateCard = (dataCard) => {
     newCardName.textContent = dataCard.name;
     const newCardImg = newCard.querySelector('.gallery__picture');
     newCardImg.setAttribute('src', dataCard.link);
+    newCardImg.setAttribute('alt', dataCard.name);
     
-    function openPopupShow() {
+    const openPopupShow = () => {
       popupTitleShow.textContent = dataCard.name;
       popupPicture.setAttribute('src', dataCard.link);
+      popupPicture.setAttribute('alt', dataCard.name);
       openPopup(popupShow);
     }
 
@@ -130,10 +130,10 @@ const generateCard = (dataCard) => {
 
     const likeButton = newCard.querySelector('.gallery__like');
     const deleteButton = newCard.querySelector('.gallery__trash');
-    likeButton.addEventListener('click', handlerAddLike);
-    deleteButton.addEventListener('click', handlerDelete);
+    likeButton.addEventListener('click', handleAddLike);
+    deleteButton.addEventListener('click', handleDelete);
 
-    closeButtonShow.addEventListener('click', closePopup);
+    //closeButtonShow.addEventListener('click', () => closePopup(popupShow));
 
     return newCard;
 }
