@@ -36,9 +36,15 @@
       <div class="popup" id="edit-popup">
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form name="name-description" class="popup__form">
-            <input type="text" name="new-profile-name" class="popup__text popup__text_type_name">
-            <input type="text" name="new-description" class="popup__text popup__text_type_description">
+          <form name="name-description" class="popup__form" novalidate>
+            <label class="popup__label">
+              <input id="profile" type="text" name="new-profile-name" class="popup__text popup__text_type_name" minlength="2" maxlength="40" required>
+              <span class="profile-error popup__text-error"></span>
+            </label>
+            <label class="popup__label">
+              <input id="description" type="text" name="new-description" class="popup__text popup__text_type_description" minlength="2" maxlength="200" required>
+              <span class="description-error popup__text-error"></span>
+            </label>
             <button type="submit" class="popup__save-button">Сохранить</button>
           </form>
           <button type="button" class="popup__close-button"></button>
@@ -47,9 +53,15 @@
       <div class="popup" id="add-popup">
         <div class="popup__container">
           <h2 class="popup__title">Новое место</h2>
-          <form name="name-description" class="popup__form">
-            <input type="text" name="new-place-name" placeholder="Название" class="popup__text popup__text_type_place">
-            <input type="text" name="new-link" placeholder="Ссылка на картинку" class="popup__text popup__text_type_link">
+          <form name="name-description" class="popup__form" novalidate>
+            <label class="popup__label">
+              <input id="place" type="text" name="new-place-name" placeholder="Название" class="popup__text popup__text_type_place" minlength="2" maxlength="30" required>
+              <span class="place-error popup__text-error"></span>
+            </label>
+            <label class="popup__label">
+              <input id="link" type="url" name="new-link" placeholder="Ссылка на картинку" class="popup__text popup__text_type_link" required>
+              <span class="link-error popup__text-error"></span>
+            </label>
             <button type="submit" class="popup__save-button">Сохранить</button>
           </form>
           <button type="button" class="popup__close-button"></button>
@@ -63,6 +75,7 @@
         </div>
       </div>
     </div>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js" defer></script>
     <template id="gallery-template">
       <li class="gallery__element">
