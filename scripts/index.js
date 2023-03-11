@@ -8,24 +8,43 @@ const closeButtonEdit = popupEdit.querySelector('.popup__close-button');
 const closeButtonAdd = popupAdd.querySelector('.popup__close-button');
 const formElementEdit = popupEdit.querySelector('.popup__form');
 const formElementAdd = popupAdd.querySelector('.popup__form');
-const newProfileName = popupEdit.querySelector('.popup__text_type_name');
-const newDescription = popupEdit.querySelector('.popup__text_type_description');
+const newProfileName = popupEdit.querySelector('.popup__input_type_name');
+const newDescription = popupEdit.querySelector('.popup__input_type_description');
 
-const newPlace = popupAdd.querySelector('.popup__text_type_place');
-const newLink = popupAdd.querySelector('.popup__text_type_link');
+const newPlace = popupAdd.querySelector('.popup__input_type_place');
+const newLink = popupAdd.querySelector('.popup__input_type_link');
 
 const saveButtonEdit = popupEdit.querySelector('.popup__save-button');
 const saveButtonAdd = popupAdd.querySelector('.popup__save-button');
 
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
+function handleCloseEsc(evt) { 
+  if (evt.key === 'Escape') {
+    const targetPopup = document.querySelector('.popup_opened')
+    closePopup(targetPopup);
+  }
+};
+
+function handleCloseOverlay(evt) { 
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+  }
+};
+
 const openPopup = (targetPopup) => {
   targetPopup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleCloseEsc);
 }
 
 const closePopup = (targetPopup) => {
   targetPopup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleCloseEsc);
 }
+
+//document.addEventListener('keydown', handleCloseEsc);
+
+document.addEventListener('click', handleCloseOverlay);
 
 const openPopupEdit = () => {
     openPopup(popupEdit);

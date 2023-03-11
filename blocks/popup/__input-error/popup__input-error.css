@@ -1,4 +1,7 @@
-.popup__text-error {
+.popup__input-error {
+    display: block;
+    min-height: 30px;
+    padding-top: 5px;
     color: #FF0000;
     font-family: 'Inter';
     font-style: normal;
