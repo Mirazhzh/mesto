@@ -36,23 +36,23 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
-const inactiveButton = (buttonElement, config) => {       //неактивная кнопка
+const disableSubmitButton = (buttonElement, config) => {       //функция делает кнопку неактивной
   buttonElement.classList.remove(config.activeButtonClass);
   buttonElement.classList.add(config.inactiveButtonClass);
   buttonElement.disabled = true;
 };
 
-const activeButton = (buttonElement, config) => {       //активная кнопка
+const enableSubmitButton = (buttonElement, config) => {       //функция делает кнопку активной
   buttonElement.classList.remove(config.inactiveButtonClass);
   buttonElement.classList.add(config.activeButtonClass);
   buttonElement.disabled = false;
 };
 
-const toggleButtonState = (inputList, buttonElement, config) => {
+const toggleButtonState = (inputList, buttonElement, config) => {     //функция переключения кнопки "Сохранить" (активна-неактивна)
   if (hasInvalidInput(inputList)) {
-    inactiveButton(buttonElement, config);
+    disableSubmitButton(buttonElement, config);
   } else {
-    activeButton(buttonElement, config);
+    enableSubmitButton(buttonElement, config);
   };
 }
 
@@ -68,11 +68,11 @@ const setEventListeners = (formElement, config) => {
   });
 };
 
-const enableValidation = (config) => {
+const enableValidation = (config) => {        //функция валидации
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
     setEventListeners(formElement, config);
   });
 };
 
-enableValidation(validationConfig);
+enableValidation(validationConfig);     //вызов функции валидации
