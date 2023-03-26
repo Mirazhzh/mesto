@@ -39,7 +39,7 @@
     <div class="popup" id="edit-popup">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form name="name-description" class="popup__form" novalidate>
+        <form name="name-description" class="popup__form popup__edit-form" novalidate>
           <label class="popup__label">
             <input id="profile" type="text" name="new-profile-name" class="popup__input popup__input_type_name"
               minlength="2" maxlength="40" required>
@@ -59,7 +59,7 @@
     <div class="popup" id="add-popup">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form name="name-description" class="popup__form" novalidate>
+        <form name="name-description" class="popup__form popup__add-form" novalidate>
           <label class="popup__label">
             <input id="place" type="text" name="new-place-name" placeholder="Название"
               class="popup__input popup__input_type_place" minlength="2" maxlength="30" required>
@@ -85,10 +85,12 @@
     </div>
 
   </div>
-  <script src="./scripts/validate.js" defer></script>
-  <script src="./scripts/cards.js" defer></script>
-  <script src="./scripts/index.js" defer></script>
-  <template id="gallery-template">
+
+  <!-- <script src="./scripts/validate.js" defer></script> -->
+
+  <script src="./scripts/index.js" type="module" defer></script>
+
+  <template id="gallery-template" class="gallery__template gallery__template_type_default">
     <li class="gallery__element">
       <article class="gallery__article">
         <img src="#" alt="#" class="gallery__picture">
@@ -100,6 +102,7 @@
       </article>
     </li>
   </template>
+
 </body>
 
 </html>

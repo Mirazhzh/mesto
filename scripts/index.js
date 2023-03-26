@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const popupEdit = document.querySelector('#edit-popup');
 const popupAdd = document.querySelector('#add-popup');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
@@ -15,9 +18,32 @@ const newLink = popupAdd.querySelector('.popup__input_type_link');
 
 const listCloseButtons = document.querySelectorAll('.popup__close-button');   //все кнопки-"крестики" (закрытия)
 
-const popupShow = document.querySelector('#show-popup');
-const popupTitleShow = popupShow.querySelector('.popup__caption');
-const popupPicture = popupShow.querySelector('.popup__picture');
+const initialCards = [
+  {
+    name: 'Карачаевск',
+    link: './images/Karachaevsk.jpg'
+  },
+  {
+    name: 'Карачаев-Черкессия',
+    link: './images/karachaevo-cherkes.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: './images/kamchatka.jpg'
+  },
+  {
+    name: 'Эльбрус',
+    link: './images/elbrus.jpg'
+  },
+  {
+    name: 'Домбай',
+    link: './images/dombaj.jpg'
+  },
+  {
+    name: 'Алтай',
+    link: './images/altaj.jpg'
+  }
+];
 
 function handleCloseEsc(evt) {      //общая функция закрытия по кнопке Esd
   if (evt.key === 'Escape') {
@@ -66,6 +92,12 @@ formElementEdit.addEventListener('submit', handleEditFormSubmit);     //слуш
 
 buttonAddCard.addEventListener('click', () => openPopup(popupAdd));   //слушатель события, вызов функции открытия попапа "Новое место"
 
+const disableSubmitButton = (buttonElement, config) => {       //функция делает кнопку неактивной
+  buttonElement.classList.remove(config.activeButtonClass);
+  buttonElement.classList.add(config.inactiveButtonClass);
+  buttonElement.disabled = true;
+};
+
 const handleAddFormSubmit = (evt) => {          //функция добавления карточки
   evt.preventDefault();
   renderCard({
@@ -79,46 +111,31 @@ const handleAddFormSubmit = (evt) => {          //функция добавле�
 
 formElementAdd.addEventListener('submit', handleAddFormSubmit);   //слушатель события, вызов функции добавления карточки
 
-const handleToggleLike = (evt) => {       //функция переключения лайков
-  evt.target.classList.toggle('gallery__like_active');
+const renderCard = (data) => {      // ф-ция создания и добавления карточки в DOM
+  const card = new Card(data, '.gallery__template_type_default');     // создаёт новый экземпляр класса Card
+  const cardElement = card.generateCard();        // генерирует карточку и возвращает наружу
+
+  document.querySelector('.gallery__list').prepend(cardElement);        // добавляет в DOM
 }
 
-const handleDeleteCard = (evt) => {         //функция для удаления карточки
-  evt.target.closest('.gallery__element').remove();
-}
-
-const galleryContainer = document.querySelector('.gallery__list');
-const galleryTemplate = document.querySelector('#gallery-template').content.querySelector('.gallery__element');
-
-const generateCard = (dataCard) => {      //функция генерации карточки
-  const newCard = galleryTemplate.cloneNode(true);
-  const newCardName = newCard.querySelector('.gallery__place-name');
-  newCardName.textContent = dataCard.name;
-  const newCardImg = newCard.querySelector('.gallery__picture');
-  newCardImg.setAttribute('src', dataCard.link);
-  newCardImg.setAttribute('alt', dataCard.name);
-
-  const openPopupShow = () => {
-    popupTitleShow.textContent = dataCard.name;
-    popupPicture.setAttribute('src', dataCard.link);
-    popupPicture.setAttribute('alt', dataCard.name);
-    openPopup(popupShow);
-  }
-
-  newCardImg.addEventListener('click', openPopupShow);
-
-  const likeButton = newCard.querySelector('.gallery__like');
-  const buttonDelete = newCard.querySelector('.gallery__trash');
-  likeButton.addEventListener('click', handleToggleLike);
-  buttonDelete.addEventListener('click', handleDeleteCard);
-
-  return newCard;
-}
-
-const renderCard = (dataCard) => {
-  galleryContainer.prepend(generateCard(dataCard));
-}
-
-initialCards.forEach((dataCard) => {
-  renderCard(dataCard);
+initialCards.forEach((data) => {        // цикл обходит массив initialCards
+  renderCard(data);
 });
+
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  activeButtonClass: 'popup__save-button_active',
+  inputErrorClass: 'popup__input-error',
+  errorClass: 'popup__error_visible'
+};
+
+const editFormValidator = new FormValidator(validationConfig, formElementEdit);
+const addFormValidator = new FormValidator(validationConfig, formElementAdd);
+
+editFormValidator.enableValidation();       //вызов функции валидации
+addFormValidator.enableValidation();
+
+export { openPopup };
