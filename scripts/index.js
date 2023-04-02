@@ -7,16 +7,16 @@ const buttonEditProfile = document.querySelector('.profile__edit-button');
 const buttonAddCard = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
-const formElementEdit = popupEdit.querySelector('.popup__form');
-const formElementAdd = popupAdd.querySelector('.popup__form');
+const formElementEdit = document.forms['edit-form'];
+const formElementAdd = document.forms['add-form'];
 const newProfileName = popupEdit.querySelector('.popup__input_type_name');
 const newDescription = popupEdit.querySelector('.popup__input_type_description');
-const buttonSaveAdd = popupAdd.querySelector('.popup__save-button');
 
 const newPlace = popupAdd.querySelector('.popup__input_type_place');
 const newLink = popupAdd.querySelector('.popup__input_type_link');
 
 const listCloseButtons = document.querySelectorAll('.popup__close-button');   //все кнопки-"крестики" (закрытия)
+const galleryContainer = document.querySelector('.gallery__list');
 
 const initialCards = [
   {
@@ -45,6 +45,19 @@ const initialCards = [
   }
 ];
 
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  activeButtonClass: 'popup__save-button_active',
+  inputErrorClass: 'popup__input-error',
+  errorClass: 'popup__error_visible'
+};
+
+const editFormValidator = new FormValidator(validationConfig, formElementEdit);
+const addFormValidator = new FormValidator(validationConfig, formElementAdd);
+
 function handleCloseEsc(evt) {      //общая функция закрытия по кнопке Esd
   if (evt.key === 'Escape') {
     const targetPopup = document.querySelector('.popup_opened')
@@ -72,7 +85,9 @@ const openPopupEdit = () => {       //функция открытия попап
   openPopup(popupEdit);
   newProfileName.value = profileName.textContent;
   newDescription.value = profileDescription.textContent;
+  editFormValidator.resetValidation();
 }
+
 buttonEditProfile.addEventListener('click', openPopupEdit);   //слушатель события, вызов функции открытия попапа "Редактировать профиль"
 
 listCloseButtons.forEach((button) => {      //функция для закрытия всех попапов при нажатии на кнопку-"крестик"
@@ -90,13 +105,15 @@ const handleEditFormSubmit = (evt) => {     //функция изменения 
 
 formElementEdit.addEventListener('submit', handleEditFormSubmit);     //слушатель события "submit" и вызов функции для изменения профиля
 
-buttonAddCard.addEventListener('click', () => openPopup(popupAdd));   //слушатель события, вызов функции открытия попапа "Новое место"
+const openPopupAdd = () => {       //функция открытия попапа "Новое место"
+  openPopup(popupAdd);
+  formElementAdd.reset();
+  newPlace.placeholder = 'Название';
+  newLink.placeholder = 'Ссылка на картинку';
+  addFormValidator.resetValidation();
+}
 
-const disableSubmitButton = (buttonElement, config) => {       //функция делает кнопку неактивной
-  buttonElement.classList.remove(config.activeButtonClass);
-  buttonElement.classList.add(config.inactiveButtonClass);
-  buttonElement.disabled = true;
-};
+buttonAddCard.addEventListener('click', openPopupAdd);   //слушатель события, вызов функции открытия попапа "Новое место"
 
 const handleAddFormSubmit = (evt) => {          //функция добавления карточки
   evt.preventDefault();
@@ -105,35 +122,25 @@ const handleAddFormSubmit = (evt) => {          //функция добавле�
     link: newLink.value
   });
   closePopup(popupAdd);
-  disableSubmitButton(buttonSaveAdd, validationConfig);
+  addFormValidator.disableSubmitButton();       //вызов метода disableSubmitButton() нового addFormValidator - делает кнопку неактивной
   formElementAdd.reset();
 };
 
 formElementAdd.addEventListener('submit', handleAddFormSubmit);   //слушатель события, вызов функции добавления карточки
 
-const renderCard = (data) => {      // ф-ция создания и добавления карточки в DOM
+function createCard(data) {      // ф-ция создания разметки карточки
+  // тут создаем карточку и возвращаем ее
   const card = new Card(data, '.gallery__template_type_default');     // создаёт новый экземпляр класса Card
   const cardElement = card.generateCard();        // генерирует карточку и возвращает наружу
-
-  document.querySelector('.gallery__list').prepend(cardElement);        // добавляет в DOM
+  return cardElement
 }
 
-initialCards.forEach((data) => {        // цикл обходит массив initialCards
-  renderCard(data);
-});
+const renderCard = (data) => {      // ф-ция создания и добавления карточки в DOM
+  const cardElement = createCard(data);
+  galleryContainer.prepend(cardElement);        // добавляет в DOM
+}
 
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  activeButtonClass: 'popup__save-button_active',
-  inputErrorClass: 'popup__input-error',
-  errorClass: 'popup__error_visible'
-};
-
-const editFormValidator = new FormValidator(validationConfig, formElementEdit);
-const addFormValidator = new FormValidator(validationConfig, formElementAdd);
+initialCards.forEach(renderCard);        // цикл обходит массив initialCards ф-цией создания и добавления карточки в DOM
 
 editFormValidator.enableValidation();       //вызов функции валидации
 addFormValidator.enableValidation();

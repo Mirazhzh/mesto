@@ -26,25 +26,44 @@ export default class FormValidator {        // создание класса For
     }
   }
 
-  _disableSubmitButton() {
+  disableSubmitButton() {     // делает кнопку Сохранить неактивной
     this._submitButton.classList.remove(this._config.activeButtonClass);
     this._submitButton.classList.add(this._config.inactiveButtonClass);
     this._submitButton.disabled = true;
   }
 
-  _enableSubmitButton() {
+  _enableSubmitButton() {     // делает кнопку Сохранить активной
     this._submitButton.classList.remove(this._config.inactiveButtonClass);
     this._submitButton.classList.add(this._config.activeButtonClass);
     this._submitButton.disabled = false;
   }
 
-  _toggleButtonState(input) {     // метод для переключения кнопки "Сохранить" (активна-неактивна)
-    if (!input.validity.valid) {
-      this._disableSubmitButton();
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+  }
+
+  // вариант 1
+  _toggleButtonState() {     // метод для переключения кнопки "Сохранить" (активна-неактивна)
+    this._hasInvalidInput = this._inputList.some(input => !input.validity.valid);
+    if (this._hasInvalidInput) {
+      this.disableSubmitButton();
     } else {
       this._enableSubmitButton();
     }
   }
+
+  // вариант 2
+  /*_toggleButtonState() {     // метод для переключения кнопки "Сохранить" (активна-неактивна)
+    this._formIsValid = this._inputList.every(input => input.validity.valid);
+    if (!this._formIsValid) {
+      this._disableSubmitButton();
+    } else {
+      this._enableSubmitButton();
+    }
+  }*/
 
   _setEventListeners() {
     this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));      //собирает в массив все инпуты
@@ -52,9 +71,9 @@ export default class FormValidator {        // создание класса For
     this._inputList.forEach((input) => {         // цикл обходит массив инпутов
       input.addEventListener('input', () => {
         this._checkInputValidity(input);
-        this._toggleButtonState(input);
+        this._toggleButtonState();
       });
-      this._toggleButtonState(input);
+      this._toggleButtonState();
     });
   }
 
