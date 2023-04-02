@@ -45,7 +45,6 @@ export default class FormValidator {        // создание класса For
     });
   }
 
-  // вариант 1
   _toggleButtonState() {     // метод для переключения кнопки "Сохранить" (активна-неактивна)
     this._hasInvalidInput = this._inputList.some(input => !input.validity.valid);
     if (this._hasInvalidInput) {
@@ -54,16 +53,6 @@ export default class FormValidator {        // создание класса For
       this._enableSubmitButton();
     }
   }
-
-  // вариант 2
-  /*_toggleButtonState() {     // метод для переключения кнопки "Сохранить" (активна-неактивна)
-    this._formIsValid = this._inputList.every(input => input.validity.valid);
-    if (!this._formIsValid) {
-      this._disableSubmitButton();
-    } else {
-      this._enableSubmitButton();
-    }
-  }*/
 
   _setEventListeners() {
     this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));      //собирает в массив все инпуты
